@@ -1,4 +1,4 @@
-package com.josuat.userapi;
+package com.josuat.userapi.model;
 
 import lombok.Getter;
 import lombok.Setter;
