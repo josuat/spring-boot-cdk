@@ -12,12 +12,4 @@ public class User {
   private String lastName;
   private String mobileNumber;
   private Address address;
-
-  public User(Title title, String firstName, String lastName, String mobileNumber, Address address) {
-    this.title = title;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.mobileNumber = mobileNumber;
-    this.address = address;
-  }
 }
