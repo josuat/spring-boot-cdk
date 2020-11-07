@@ -1,0 +1,12 @@
+spring:
+  security:
+    user:
+      name: admin
+      password: secret
+
+  jpa:
+    database: MYSQL
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update

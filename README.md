@@ -6,5 +6,10 @@
 1. Build docker image **user-api**
 
         ./gradlew build
-        ./gradlew docker
+        ./gradlew dockerTag
 
+
+
+### Run locally
+
+    docker-compose up -d
