@@ -2,11 +2,14 @@ plugins {
     id 'org.springframework.boot' version '2.3.5.RELEASE'
     id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id 'java'
+    id 'pl.allegro.tech.build.axion-release' version '1.12.1'
+    id 'com.palantir.docker' version '0.25.0'
 }
 
 group = 'com.josuat'
-version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+
+project.version = scmVersion.version
 
 repositories {
     mavenCentral()
@@ -24,6 +27,12 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+}
+
+docker {
+    name "user-api:$version"
+    files "build/libs/${bootJar.archiveFileName.get()}"
+    buildArgs([JAR_FILE: bootJar.archiveFileName.get()])
 }
 
 test {
