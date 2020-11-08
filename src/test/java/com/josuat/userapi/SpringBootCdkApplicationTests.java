@@ -141,6 +141,31 @@ class SpringBootCdkApplicationTests {
   }
 
   @Test
+  void unauthorizedGetRejected() throws Exception {
+    mockMvc.perform(
+        get("/users/1").
+            contentType("application/json")).
+        andExpect(status().is(401));
+
+    HttpHeaders headers = new HttpHeaders();
+    String token = new String(Base64.getEncoder().encode(("not-a-user" + ":" + "wrong").getBytes()));
+    headers.set("Authorization", "Basic " + token);
+
+    mockMvc.perform(
+        get("/users/3").
+            contentType("application/json").
+            headers(headers)).
+        andExpect(status().is(401));
+  }
+
+  @Test
+  void healthIsUnprotected() throws Exception {
+    mockMvc.perform(
+        get("/actuator/health")).
+        andExpect(status().isOk());
+  }
+
+  @Test
   @Order(20)
   void verifyUserRepoState() {
     Optional<User> optionalUser = userRepository.findById(1L);
