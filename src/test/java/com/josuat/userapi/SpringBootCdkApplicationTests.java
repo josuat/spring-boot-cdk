@@ -108,16 +108,46 @@ class SpringBootCdkApplicationTests {
         andExpect(content().json("{\"id\": 1, \"mobileNumber\": \"0404111222\"}"));
   }
 
-  //TODO test invalid inputs
+  @Test
+  @Order(15)
+  void malformedRequestUrlGet() throws Exception {
+    mockMvc.perform(
+        get("/users/foo").
+            contentType("application/json").
+            headers(authHeaders)).
+        andExpect(status().is(400));
+  }
+
+  @Test
+  @Order(16)
+  void malformedJsonPost() throws Exception {
+    mockMvc.perform(
+        post("/users").
+            contentType("application/json").
+            headers(authHeaders).
+            content("{\"firstName\": \"John\"}")).
+        andExpect(status().is(400));
+  }
+
+  @Test
+  @Order(17)
+  void overwriteExistingUser() throws Exception {
+    mockMvc.perform(
+        post("/users").
+            contentType("application/json").
+            headers(authHeaders).
+            content("{\"id\": 1, \"firstName\": \"Foo\", \"lastName\": \"bar\"}")).
+        andExpect(status().is(403));
+  }
 
   @Test
   @Order(20)
   void verifyUserRepoState() {
-		Optional<User> optionalUser = userRepository.findById(1L);
-		assertTrue(optionalUser.isPresent());
-		User user = optionalUser.get();
-		assertEquals(user.getFirstName(), "John");
-		assertEquals(user.getMobileNumber(), "0404111222");
-		assertEquals(user.getAddress().getPostcode(), "2040");
-	}
+    Optional<User> optionalUser = userRepository.findById(1L);
+    assertTrue(optionalUser.isPresent());
+    User user = optionalUser.get();
+    assertEquals(user.getFirstName(), "John");
+    assertEquals(user.getMobileNumber(), "0404111222");
+    assertEquals(user.getAddress().getPostcode(), "2040");
+  }
 }

@@ -36,6 +36,9 @@ public class UserController extends ResponseEntityExceptionHandler {
 
   @PostMapping(value = "/users", consumes = MediaType.APPLICATION_JSON_VALUE)
   public User createUser(@Valid @RequestBody User user) {
+    if (user.getId() != null && userRepository.existsById(user.getId())) {
+      throw new ResponseStatusException(HttpStatus.FORBIDDEN, String.format("User with id %s exists already!", user.getId()));
+    }
     return userRepository.save(user);
   }
 
