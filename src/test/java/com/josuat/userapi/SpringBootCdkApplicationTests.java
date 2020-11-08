@@ -2,6 +2,7 @@ package com.josuat.userapi;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.josuat.userapi.model.User;
+import com.josuat.userapi.repository.UserRepository;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

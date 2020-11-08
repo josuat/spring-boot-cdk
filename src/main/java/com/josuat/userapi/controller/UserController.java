@@ -1,6 +1,7 @@
-package com.josuat.userapi;
+package com.josuat.userapi.controller;
 
 import com.josuat.userapi.model.User;
+import com.josuat.userapi.repository.UserRepository;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;

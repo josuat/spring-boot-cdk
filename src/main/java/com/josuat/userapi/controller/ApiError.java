@@ -1,4 +1,4 @@
-package com.josuat.userapi;
+package com.josuat.userapi.controller;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

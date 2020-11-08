@@ -1,4 +1,4 @@
-package com.josuat.userapi;
+package com.josuat.userapi.controller;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
